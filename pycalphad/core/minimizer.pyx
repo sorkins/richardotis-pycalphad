@@ -335,16 +335,33 @@ cdef void extract_equilibrium_solution(double[::1] chemical_potentials, double[:
 
 
 def check_convergence_and_change_phases(phase_amt, current_free_stable_compset_indices, metastable_phase_iterations,
-                                        times_compset_removed, driving_forces, can_add_phases):
+                                        times_compset_removed, driving_forces, can_add_phases, max_stable_phases):
+    compsets_to_remove = set(current_free_stable_compset_indices).intersection(set(np.nonzero(np.array(phase_amt) < 1e-9)[0]))
     # Only add phases with positive driving force which have been metastable for at least 5 iterations, which have been removed fewer than 4 times
     if can_add_phases:
         newly_metastable_compsets = set(np.nonzero((np.array(metastable_phase_iterations) < 5))[0]) - \
                                     set(current_free_stable_compset_indices)
         add_criteria = np.logical_and(np.array(driving_forces) > 1e-5, np.array(times_compset_removed) < 4)
         compsets_to_add = set((np.nonzero(add_criteria)[0])) - newly_metastable_compsets
+        max_allowed_to_add = max_stable_phases + len(compsets_to_remove) - len(current_free_stable_compset_indices)
+        # We must obey the Gibbs phase rule
+        if len(compsets_to_add) > 0:
+            if max_allowed_to_add < 1:
+                # We are at the maximum number of allowed phases, yet there is still positive driving force
+                # Destabilize one phase and add only one phase
+                possible_phases_to_destabilize = set(current_free_stable_compset_indices) - compsets_to_add - compsets_to_remove
+                # Arbitrarily pick the lowest index to destabilize
+                idx_to_remove = sorted(possible_phases_to_destabilize)[0]
+                compsets_to_remove.add(idx_to_remove)
+                phase_amt[idx_to_remove] = 0
+                # XXX: This should be ordered by driving force
+                compsets_to_add = {sorted(compsets_to_add)[0]}
+            elif max_allowed_to_add < len(compsets_to_add):
+                # Only add a number of phases within the limit
+                # XXX: This should be ordered by driving force
+                compsets_to_add = set(sorted(compsets_to_add)[:max_allowed_to_add])
     else:
         compsets_to_add = set()
-    compsets_to_remove = set(np.nonzero(np.array(phase_amt) < 1e-9)[0])
     new_free_stable_compset_indices = np.array(sorted((set(current_free_stable_compset_indices) - compsets_to_remove)
                                                       | compsets_to_add
                                                       )
@@ -717,6 +734,7 @@ cpdef find_solution(list compsets, int num_statevars, int num_components,
     cdef int num_stable_phases, num_fixed_components, num_free_variables
     cdef CompositionSet compset, compset2
     cdef double mass_residual = 1e-30
+    cdef double max_free_stable_phases
     cdef double max_delta_m, delta_energy, allowed_mass_residual
     cdef double[::1] x, new_y, delta_y
     cdef double[::1] delta_m = np.zeros(num_components)
@@ -745,6 +763,7 @@ cpdef find_solution(list compsets, int num_statevars, int num_components,
         allowed_mass_residual = min(allowed_mass_residual, (1-np.sum(spec.prescribed_elemental_amounts))/10)
     else:
         allowed_mass_residual = 1e-8
+    max_free_stable_phases = num_components + len(spec.free_statevar_indices) - len(spec.fixed_stable_compset_indices)
     state.mass_residual = 1e10
     phase_change_counter = 5
     step_size = 1./10
@@ -846,7 +865,7 @@ cpdef find_solution(list compsets, int num_statevars, int num_components,
                 driving_forces[idx] =  np.dot(chemical_potentials, phase_amounts_per_mole_atoms[idx, :, 0]) - phase_energies_per_mole_atoms[idx, 0]
             converged, new_free_stable_compset_indices = \
                 check_convergence_and_change_phases(state.phase_amt, state.free_stable_compset_indices, metastable_phase_iterations,
-                                                    times_compset_removed, driving_forces, iteration > 3)
+                                                    times_compset_removed, driving_forces, iteration > 3, max_free_stable_phases)
             # Force some amount of newly stable phases
             for idx in new_free_stable_compset_indices:
                 if state.phase_amt[idx] < 1e-10:
@@ -860,6 +879,8 @@ cpdef find_solution(list compsets, int num_statevars, int num_components,
                 break
             phase_change_counter = 5
             state.free_stable_compset_indices = np.array(new_free_stable_compset_indices, dtype=np.int32)
+            if len(state.free_stable_compset_indices) > max_free_stable_phases:
+                raise ValueError('Number of stable phases exceeds Gibbs phase rule')
 
         for idx in range(len(state.compsets)):
             if idx in state.free_stable_compset_indices:
