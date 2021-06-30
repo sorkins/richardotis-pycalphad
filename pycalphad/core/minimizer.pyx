@@ -343,7 +343,7 @@ def check_convergence_and_change_phases(phase_amt, current_free_stable_compset_i
                                     set(current_free_stable_compset_indices)
         add_criteria = np.logical_and(np.array(driving_forces) > 1e-5, np.array(times_compset_removed) < 4)
         compsets_to_add = set((np.nonzero(add_criteria)[0])) - newly_metastable_compsets
-        max_allowed_to_add = max_stable_phases + len(compsets_to_remove) - len(current_free_stable_compset_indices)
+        max_allowed_to_add = int(max_stable_phases) + len(compsets_to_remove) - len(current_free_stable_compset_indices)
         # We must obey the Gibbs phase rule
         if len(compsets_to_add) > 0:
             if max_allowed_to_add < 1:
@@ -716,14 +716,21 @@ cpdef take_step(SystemSpecification spec, SystemState state, double step_size):
         for i in range(spec.num_statevars, new_y.shape[0]):
             largest_internal_dof_change = max(largest_internal_dof_change, abs(new_y[i] - x[i]))
         x[:] = new_y
-
+    if delta_statevars[2] > 50:
+        delta_statevars[2] = 50
+    if delta_statevars[2] < -50:
+        delta_statevars[2] = -50
+    #print('delta_statevars ', np.array(delta_statevars))
     # Update state variables
     for idx in range(len(state.compsets)):
         x = state.dof[idx]
         for sv_idx in range(delta_statevars.shape[0]):
             x[sv_idx] += delta_statevars[sv_idx]
         # We need real state variable bounds support
-
+        if x[2] < 300:
+            x[2] = 300
+        elif x[2] > 6000:
+            x[2] = 6000
 
 cpdef find_solution(list compsets, int num_statevars, int num_components,
                     double prescribed_system_amount, double[::1] initial_chemical_potentials,
@@ -791,8 +798,11 @@ cpdef find_solution(list compsets, int num_statevars, int num_components,
                 delta_energy = 1e-10
         if state.mass_residual < 1e-2:
             step_size = min(1, 1./delta_energy)
+        elif np.max(np.abs(delta_m)) > 0.1:
+            step_size = 1./100
         else:
             step_size = 1./10
+        #print(f'state.iteration {state.iteration} step_size {step_size}')
 
         # Consolidate duplicate phases and remove unstable phases
         compsets_to_remove = set()
@@ -850,6 +860,7 @@ cpdef find_solution(list compsets, int num_statevars, int num_components,
         # Phases that "want" to be removed will keep having their phase_amt set to zero, so mass balance is unaffected
         system_is_feasible = (state.mass_residual < allowed_mass_residual) and (state.largest_internal_cons_max_residual < 1e-9) and \
                              (chempot_diff < 1e-12) and (state.iteration > 5) and (largest_moles_change < 1e-9) and (phase_change_counter == 0)
+        #print(f'state.iteration {state.iteration} state.mass_residual {state.mass_residual} state.largest_internal_cons_max_residual {state.largest_internal_cons_max_residual} chempot_diff {chempot_diff} largest_moles_change {largest_moles_change}')
         if system_is_feasible:
             # Check driving forces for metastable phases
             # This needs to be done per mole of atoms, not per formula unit, since we compare phases to each other
