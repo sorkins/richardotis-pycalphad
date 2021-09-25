@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Install pycalphad" href="INSTALLING.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="What’s New" href="CHANGES.html" />
 
     <meta name="generator" content="sphinx-4.2.0, furo 2021.09.22"/>
-        <title>pycalphad 0.8.6.dev38+g3f234c6d documentation</title>
+        <title>Releasing pycalphad - pycalphad 0.8.6.dev38+g3f234c6d documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=150e365fa939648e89c22f6d7d13c72a1657915a" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">pycalphad 0.8.6.dev38+g3f234c6d documentation</div></a>
+      <a href="index.html"><div class="brand">pycalphad 0.8.6.dev38+g3f234c6d documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -143,7 +143,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="index.html">
   
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="_static/pycalphad-logo-withtext.png" alt="Logo"/>
@@ -188,8 +188,8 @@
 <li class="toctree-l1"><a class="reference internal" href="CHANGES.html">What’s New</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Developer</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="releasing.html">Releasing pycalphad</a></li>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Releasing pycalphad</a></li>
 </ul>
 
 </div>
@@ -216,115 +216,75 @@
           </label>
         </div>
         <article role="main">
-          <section id="logo-pycalphad-computational-thermodynamics">
-<h1><a class="reference internal" href="_images/pycalphad-logo-notext.png"><img alt="Logo" src="_images/pycalphad-logo-notext.png" style="width: 20pt; height: 20pt;"/></a> pycalphad: Computational Thermodynamics<a class="headerlink" href="#logo-pycalphad-computational-thermodynamics" title="Permalink to this headline">¶</a></h1>
-<figure class="align-center">
-<a class="reference internal image-reference" href="_images/BinaryExamples_9_1.png"><img alt="Al-Ni Phase Diagram (Dupin et al., 2001)" src="_images/BinaryExamples_9_1.png" style="width: 565px; height: 416px;"/></a>
-</figure>
-<p>pycalphad is a Python library for computational thermodynamics using the CALPHAD method.</p>
-<p>The latest development version of the source code can be found on <a class="reference external" href="https://github.com/pycalphad/pycalphad">GitHub</a>.
-The newest stable version can be found on <a class="reference external" href="https://pypi.python.org/pypi/pycalphad">PyPI</a>.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="INSTALLING.html">Install pycalphad</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="INSTALLING.html#pip-recommended">pip (recommended)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="INSTALLING.html#conda">conda</a></li>
-<li class="toctree-l2"><a class="reference internal" href="INSTALLING.html#development-version">Development version</a></li>
-</ul>
+          <section id="releasing-pycalphad">
+<h1>Releasing pycalphad<a class="headerlink" href="#releasing-pycalphad" title="Permalink to this headline">¶</a></h1>
+<section id="create-a-release-of-pycalphad">
+<h2>Create a release of pycalphad<a class="headerlink" href="#create-a-release-of-pycalphad" title="Permalink to this headline">¶</a></h2>
+<p>These steps assume that <code class="docutils literal notranslate"><span class="pre">0.1</span></code> is the most recently tagged version number and <code class="docutils literal notranslate"><span class="pre">0.2</span></code> is the next version number to be released.
+Replace their values with the last public release’s version number and the new version number as appropriate.</p>
+<ol class="arabic simple">
+<li><p>Determine what the next version number should be using <a class="reference external" href="https://semver.org/">semantic versioning</a>.</p></li>
+<li><p>Resolve or defer all pull requests and issues tagged with the upcoming version milestone.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span></code> to save any uncommitted work.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">develop</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> to make sure you haven’t missed any last-minute commits. <strong>After this point, nothing else is making it into this version.</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">build_ext</span> <span class="pre">--inplace</span></code> (assuming an editable development version is already installed).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">pycalphad</span></code> to ensure that all tests pass locally.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx-apidoc</span> <span class="pre">-f</span> <span class="pre">-H</span> <span class="pre">'API</span> <span class="pre">Documentation'</span> <span class="pre">-o</span> <span class="pre">docs/api/</span> <span class="pre">pycalphad/</span> <span class="pre">pycalphad/tests</span> <span class="pre">'pycalphad/core/*.pxd'</span> <span class="pre">'pycalphad/core/*.so'</span></code> to regenerate the API documentation.</p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">CHANGES.rst</span></code> with a human-readable list of changes since the last commit.
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span> <span class="pre">--no-decorate</span> <span class="pre">--color</span> <span class="pre">0.1^..develop</span></code> can be used to list the changes since the last version.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">docs/api</span> <span class="pre">CHANGES.rst</span></code> to stage the updated documentation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">"REL:</span> <span class="pre">0.2"</span></code> to commit the changes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">develop</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">master</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">develop</span></code> (do not create a merge commit)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">master</span></code></p></li>
+<li><p><strong>Verify that all continuous integration test and build workflows pass.</strong></p></li>
+<li><p>Create a release on GitHub</p>
+<ol class="arabic simple">
+<li><p>Go to <a class="reference external" href="https://github.com/pycalphad/pycalphad/releases/new">https://github.com/pycalphad/pycalphad/releases/new</a></p></li>
+<li><p>Set the “Tag version” field to <code class="docutils literal notranslate"><span class="pre">0.2</span></code>.</p></li>
+<li><p>Set the branch target to <code class="docutils literal notranslate"><span class="pre">master</span></code>.</p></li>
+<li><p>Set the “Release title” to <code class="docutils literal notranslate"><span class="pre">pycalphad</span> <span class="pre">0.2</span></code>.</p></li>
+<li><p>Leave the description box blank.</p></li>
+<li><p>If this version is a pre-release, check the “This is a pre-release” box.</p></li>
+<li><p>Click “Publish release”.</p></li>
+</ol>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples/BinaryExamples.html">Plotting Isobaric Binary Phase Diagrams with <code class="docutils literal notranslate"><span class="pre">binplot</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/BinaryExamples.html#calculating-energy-surfaces-of-binary-systems">Calculating Energy Surfaces of Binary Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/CementiteAnalysis.html">Heat Capacity of Cementite (<span class="math notranslate nohighlight">\(Fe_3C\)</span>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/EquilibriumWithOrdering.html">Equilibrium Properties and Partial Ordering (Al-Fe and Al-Ni)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/TernaryExamples.html">Plotting Ternary Phase Diagrams and Using Triangular Axes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/ReferenceStateExamples.html">Calculations with Reference States</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/PlotActivity.html">Calculate and Plot Activity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/ViscosityModel.html">Custom Models in pycalphad: Viscosity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/UsingCalculationResults.html">Exploring <code class="docutils literal notranslate"><span class="pre">calculate</span></code> and <code class="docutils literal notranslate"><span class="pre">equilibrium</span></code> xarray Datasets</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#what-units-does-pycalphad-use">What units does pycalphad use?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#is-any-parallelism-supported-in-pycalphad">Is any parallelism supported in pycalphad?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#how-long-should-equilibrium-calculations-take">How long should equilibrium calculations take?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#typeerror-argument-is-not-an-mpz-during-a-calculation"><code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">argument</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">an</span> <span class="pre">mpz</span></code> during a calculation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#recursionerror-during-a-calculation"><code class="docutils literal notranslate"><span class="pre">RecursionError</span></code> during a calculation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#text-is-sometimes-cut-off-when-saving-figures">Text is sometimes cut off when saving figures</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="api/modules.html">API Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pycalphad.html">pycalphad package</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGES.html">What’s New</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id1">0.9.2 (2021-08-12)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id2">0.9.1 (2021-08-08)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id3">0.9.0 (2021-06-06)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id5">0.8.5 (2021-05-20)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id6">0.8.4 (2020-10-28)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id7">0.8.3 (2020-03-31)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id8">0.8.2 (2020-03-07)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id9">0.8.1 (2019-11-28)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id10">0.8 (2019-05-31)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id11">0.7.1 (2018-11-14)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id12">0.7 (2018-03-19)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id13">0.6.1 (2017-12-01)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id14">0.6 (2017-11-26)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id15">0.5.2 (2017-08-10)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id16">0.5.1 (2017-05-12)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id17">0.5 (2017-05-04)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id18">0.4.2 (2016-08-26)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id19">0.4.1 (2016-08-08)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id20">0.4 (2016-08-03)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id21">0.3.6 (2016-06-01)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id22">0.3.5 (2016-05-14)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id23">0.3.4 (2016-04-28)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id24">0.3.3 (2016-04-21)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id25">0.3.2 (2016-02-22)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id26">0.3.1 (2016-02-18)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id27">0.3 (2016-02-17)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id28">0.2.5 (2015-12-22)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id29">0.2.4 (2015-11-18)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id30">0.2.3 (2015-11-08)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id31">0.2.2 (2015-10-17)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id32">0.2.1 (2015-09-10)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id33">0.2 (2015-08-23)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#post1-2015-04-10">0.1.1.post1 (2015-04-10)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id34">0.1.1 (2015-04-09)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CHANGES.html#id35">0.1 (2015-04-09)</a></li>
-</ul>
-</li>
-</ul>
+<li><p>The new version will be available on PyPI when the <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">and</span> <span class="pre">deploy</span> <span class="pre">to</span> <span class="pre">PyPI</span></code> workflow on GitHub Actions finishes successfully.</p></li>
+</ol>
+</section>
+<section id="deploy-to-pypi-manually">
+<h2>Deploy to PyPI (manually)<a class="headerlink" href="#deploy-to-pypi-manually" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>DO NOT FOLLOW THESE STEPS unless the GitHub Actions deployment workflow is broken.
+Creating a GitHub release should trigger the <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">and</span> <span class="pre">deploy</span> <span class="pre">to</span> <span class="pre">PyPI</span></code> workflow on GitHub Actions that will upload source and platform-dependent wheel distributions automatically.</p>
 </div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="releasing.html">Releasing pycalphad</a></li>
-</ul>
-</div>
+<p>To release a source distribution to PyPI:</p>
+<ol class="arabic simple">
+<li><p>If deploying for the first time: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">twine</span> <span class="pre">build</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-R</span> <span class="pre">dist/*</span></code> on Linux/OSX or <code class="docutils literal notranslate"><span class="pre">del</span> <span class="pre">dist/*</span></code> on Windows</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">master</span></code> to checkout the latest version</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> to verify the repository state matches the newly created tag</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">build</span> <span class="pre">--sdist</span></code></p></li>
+<li><p><strong>Make sure that the script correctly detected the new version exactly and not a dirty / revised state of the repo.</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">twine</span> <span class="pre">upload</span> <span class="pre">dist/*</span></code> to upload (assumes a <a class="reference external" href="https://packaging.python.org/specifications/pypirc/">correctly configured</a> <code class="docutils literal notranslate"><span class="pre">~/.pypirc</span></code> file)</p></li>
+</ol>
 </section>
-<section id="getting-help">
-<h1>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h1>
-<p>Questions about installing and using pycalphad can be addressed in the <a class="reference external" href="https://groups.google.com/d/forum/pycalphad">pycalphad Google Group</a>.
-Technical issues and bugs should be reported on on <a class="reference external" href="https://github.com/pycalphad/pycalphad">GitHub</a>.
-A public chat channel is available on <a class="reference external" href="https://gitter.im/pycalphad/pycalphad">Gitter</a>.</p>
+<section id="deploy-to-conda-forge">
+<h2>Deploy to conda-forge<a class="headerlink" href="#deploy-to-conda-forge" title="Permalink to this headline">¶</a></h2>
+<p>Start with the commit checked out which was tagged with the new version.</p>
+<ol class="arabic simple">
+<li><p>Generate the SHA256 hash of the build artifact (tarball) submitted to PyPI.</p></li>
+<li><p>Fork the conda-forge/pycalphad-feedstock repo.</p></li>
+<li><p>Update pycalphad version and sha256 strings in the <code class="docutils literal notranslate"><span class="pre">recipe/meta.yaml</span></code> file.</p></li>
+<li><p>If any of the dependencies changed since the last release, make sure to update the <code class="docutils literal notranslate"><span class="pre">recipe/meta.yaml</span></code> file.</p></li>
+<li><p>Submit a pull request to the main pycalphad feedstock repo.</p></li>
+<li><p>Once the tests pass, merge the pull request.</p></li>
+</ol>
 </section>
-<section id="citing">
-<h1>Citing<a class="headerlink" href="#citing" title="Permalink to this headline">¶</a></h1>
-<p>If you use pycalphad in your research, please consider citing the following work:</p>
-<p>Otis, R. &amp; Liu, Z.-K., (2017). pycalphad: CALPHAD-based Computational Thermodynamics in Python. Journal of Open Research Software. 5(1), p.1. DOI: <a class="reference external" href="http://doi.org/10.5334/jors.140">http://doi.org/10.5334/jors.140</a></p>
-</section>
-<section id="acknowledgements">
-<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h1>
-<p>Development has been made possible in part through NASA Space Technology Research Fellowship (NSTRF) grant NNX14AL43H, and is supervised by <a class="reference external" href="http://www.phases.psu.edu/">Prof. Zi-Kui Liu</a> in the <a class="reference external" href="http://matse.psu.edu/">Department of Materials Science and Engineering</a> at the <a class="reference external" href="http://www.psu.edu/">Pennsylvania State University</a>.</p>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-</ul>
 </section>
 
         </article>
@@ -332,16 +292,18 @@ A public chat channel is available on <a class="reference external" href="https:
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="INSTALLING.html">
+          
+          <a class="prev-page" href="CHANGES.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
-                  <span>Next</span>
+                  <span>Previous</span>
                 </div>
-                <div class="title">Install pycalphad</div>
+                
+                <div class="title">What’s New</div>
+                
               </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          
         </div>
 
         <div class="related-information">
@@ -350,7 +312,7 @@ A public chat channel is available on <a class="reference external" href="https:
               and
               <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
               <a href="https://github.com/pradyunsg/furo">Furo theme</a>. |
-            <a class="muted-link" href="_sources/index.rst.txt"
+            <a class="muted-link" href="_sources/releasing.rst.txt"
                rel="nofollow">
               Show Source
             </a>
@@ -370,13 +332,12 @@ A public chat channel is available on <a class="reference external" href="https:
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#"> pycalphad: Computational Thermodynamics</a><ul>
+<li><a class="reference internal" href="#">Releasing pycalphad</a><ul>
+<li><a class="reference internal" href="#create-a-release-of-pycalphad">Create a release of pycalphad</a></li>
+<li><a class="reference internal" href="#deploy-to-pypi-manually">Deploy to PyPI (manually)</a></li>
+<li><a class="reference internal" href="#deploy-to-conda-forge">Deploy to conda-forge</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#getting-help">Getting Help</a></li>
-<li><a class="reference internal" href="#citing">Citing</a></li>
-<li><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
           </div>
