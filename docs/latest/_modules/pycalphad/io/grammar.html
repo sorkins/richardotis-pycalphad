@@ -4,8 +4,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <meta name="generator" content="sphinx-4.3.0, furo 2021.10.09"/>
-        <title>pycalphad.io.grammar - pycalphad 0.8.6.dev41+g631c41c3 documentation</title>
+    <meta name="generator" content="sphinx-4.5.0, furo 2021.10.09"/>
+        <title>pycalphad.io.grammar - pycalphad 0.8.6.dev55+gf8e39510 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=0254c309f5cadf746f1a613e7677379ac9c8cdcd" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">pycalphad 0.8.6.dev41+g631c41c3 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">pycalphad 0.8.6.dev55+gf8e39510 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
     <img class="sidebar-logo" src="../../../_static/pycalphad-logo-withtext.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">pycalphad 0.8.6.dev41+g631c41c3 documentation</span>
+  <span class="sidebar-brand-text">pycalphad 0.8.6.dev55+gf8e39510 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -160,14 +160,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../INSTALLING.html">Install pycalphad</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/BinaryExamples.html">Plotting Isobaric Binary Phase Diagrams with <code class="docutils literal notranslate"><span class="pre">binplot</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/BinaryExamples.html#calculating-energy-surfaces-of-binary-systems">Calculating Energy Surfaces of Binary Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/CementiteAnalysis.html">Heat Capacity of Cementite (<span class="math notranslate nohighlight">\(Fe_3C\)</span>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/EquilibriumWithOrdering.html">Equilibrium Properties and Partial Ordering (Al-Fe and Al-Ni)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/BinaryExamples.html#Calculating-Energy-Surfaces-of-Binary-Systems">Calculating Energy Surfaces of Binary Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/TernaryExamples.html">Plotting Ternary Phase Diagrams and Using Triangular Axes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/UsingCalculationResults.html">Exploring <code class="docutils literal notranslate"><span class="pre">calculate</span></code> and <code class="docutils literal notranslate"><span class="pre">equilibrium</span></code> xarray Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/ChargedPhases.html">Phases with Electrically Charged Species</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/ReferenceStateExamples.html">Calculations with Reference States</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/PlotActivity.html">Calculate and Plot Activity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/EquilibriumWithOrdering.html">Equilibrium Properties and Partial Ordering (Al-Fe and Al-Ni)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/ViscosityModel.html">Custom Models in pycalphad: Viscosity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/UsingCalculationResults.html">Exploring <code class="docutils literal notranslate"><span class="pre">calculate</span></code> and <code class="docutils literal notranslate"><span class="pre">equilibrium</span></code> xarray Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/CementiteAnalysis.html">Heat Capacity of Cementite (<span class="math notranslate nohighlight">\(Fe_3C\)</span>)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
@@ -218,8 +219,8 @@
           <h1>Source code for pycalphad.io.grammar</h1><div class="highlight"><pre>
 <span></span><span class="sd">""""Common pyparsing grammar patterns."""</span>
 
-<span class="kn">from</span> <span class="nn">pyparsing</span> <span class="k">import</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">nums</span>
-<span class="kn">from</span> <span class="nn">pyparsing</span> <span class="k">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">OneOrMore</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Regex</span><span class="p">,</span> <span class="n">Suppress</span><span class="p">,</span> <span class="n">Word</span>
+<span class="kn">from</span> <span class="nn">pyparsing</span> <span class="kn">import</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">nums</span>
+<span class="kn">from</span> <span class="nn">pyparsing</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">OneOrMore</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Regex</span><span class="p">,</span> <span class="n">Suppress</span><span class="p">,</span> <span class="n">Word</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
 <span class="n">pos_neg_int_number</span> <span class="o">=</span> <span class="n">Word</span><span class="p">(</span><span class="s1">'+-'</span> <span class="o">+</span> <span class="n">nums</span><span class="p">)</span><span class="o">.</span><span class="n">setParseAction</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>  <span class="c1"># '+3' or '-2' are examples</span>
@@ -277,5 +278,6 @@
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/scripts/main.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>
 </html>

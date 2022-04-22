@@ -4,8 +4,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <meta name="generator" content="sphinx-4.3.0, furo 2021.10.09"/>
-        <title>pycalphad.core.equilibrium - pycalphad 0.8.6.dev41+g631c41c3 documentation</title>
+    <meta name="generator" content="sphinx-4.5.0, furo 2021.10.09"/>
+        <title>pycalphad.core.equilibrium - pycalphad 0.8.6.dev55+gf8e39510 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=0254c309f5cadf746f1a613e7677379ac9c8cdcd" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">pycalphad 0.8.6.dev41+g631c41c3 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">pycalphad 0.8.6.dev55+gf8e39510 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
     <img class="sidebar-logo" src="../../../_static/pycalphad-logo-withtext.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">pycalphad 0.8.6.dev41+g631c41c3 documentation</span>
+  <span class="sidebar-brand-text">pycalphad 0.8.6.dev55+gf8e39510 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -160,14 +160,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../INSTALLING.html">Install pycalphad</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/BinaryExamples.html">Plotting Isobaric Binary Phase Diagrams with <code class="docutils literal notranslate"><span class="pre">binplot</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/BinaryExamples.html#calculating-energy-surfaces-of-binary-systems">Calculating Energy Surfaces of Binary Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/CementiteAnalysis.html">Heat Capacity of Cementite (<span class="math notranslate nohighlight">\(Fe_3C\)</span>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/EquilibriumWithOrdering.html">Equilibrium Properties and Partial Ordering (Al-Fe and Al-Ni)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/BinaryExamples.html#Calculating-Energy-Surfaces-of-Binary-Systems">Calculating Energy Surfaces of Binary Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/TernaryExamples.html">Plotting Ternary Phase Diagrams and Using Triangular Axes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/UsingCalculationResults.html">Exploring <code class="docutils literal notranslate"><span class="pre">calculate</span></code> and <code class="docutils literal notranslate"><span class="pre">equilibrium</span></code> xarray Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/ChargedPhases.html">Phases with Electrically Charged Species</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/ReferenceStateExamples.html">Calculations with Reference States</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/PlotActivity.html">Calculate and Plot Activity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/EquilibriumWithOrdering.html">Equilibrium Properties and Partial Ordering (Al-Fe and Al-Ni)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/ViscosityModel.html">Custom Models in pycalphad: Viscosity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/UsingCalculationResults.html">Exploring <code class="docutils literal notranslate"><span class="pre">calculate</span></code> and <code class="docutils literal notranslate"><span class="pre">equilibrium</span></code> xarray Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/CementiteAnalysis.html">Heat Capacity of Cementite (<span class="math notranslate nohighlight">\(Fe_3C\)</span>)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
@@ -221,20 +222,20 @@
 <span class="sd">calculated phase equilibria.</span>
 <span class="sd">"""</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="k">import</span> <span class="n">Mapping</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Mapping</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">import</span> <span class="nn">pycalphad.variables</span> <span class="k">as</span> <span class="nn">v</span>
-<span class="kn">from</span> <span class="nn">pycalphad.core.utils</span> <span class="k">import</span> <span class="n">unpack_components</span><span class="p">,</span> <span class="n">unpack_condition</span><span class="p">,</span> <span class="n">unpack_phases</span><span class="p">,</span> <span class="n">filter_phases</span><span class="p">,</span> <span class="n">instantiate_models</span><span class="p">,</span> <span class="n">get_state_variables</span>
-<span class="kn">from</span> <span class="nn">pycalphad</span> <span class="k">import</span> <span class="n">calculate</span>
-<span class="kn">from</span> <span class="nn">pycalphad.core.errors</span> <span class="k">import</span> <span class="n">EquilibriumError</span><span class="p">,</span> <span class="n">ConditionError</span>
-<span class="kn">from</span> <span class="nn">pycalphad.core.starting_point</span> <span class="k">import</span> <span class="n">starting_point</span>
-<span class="kn">from</span> <span class="nn">pycalphad.codegen.callables</span> <span class="k">import</span> <span class="n">build_phase_records</span>
-<span class="kn">from</span> <span class="nn">pycalphad.core.eqsolver</span> <span class="k">import</span> <span class="n">_solve_eq_at_conditions</span>
-<span class="kn">from</span> <span class="nn">pycalphad.core.phase_rec</span> <span class="k">import</span> <span class="n">PhaseRecord</span>
-<span class="kn">from</span> <span class="nn">pycalphad.core.solver</span> <span class="k">import</span> <span class="n">Solver</span>
-<span class="kn">from</span> <span class="nn">pycalphad.core.light_dataset</span> <span class="k">import</span> <span class="n">LightDataset</span>
-<span class="kn">from</span> <span class="nn">pycalphad.model</span> <span class="k">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">pycalphad.core.utils</span> <span class="kn">import</span> <span class="n">unpack_components</span><span class="p">,</span> <span class="n">unpack_condition</span><span class="p">,</span> <span class="n">unpack_phases</span><span class="p">,</span> <span class="n">filter_phases</span><span class="p">,</span> <span class="n">instantiate_models</span><span class="p">,</span> <span class="n">get_state_variables</span>
+<span class="kn">from</span> <span class="nn">pycalphad</span> <span class="kn">import</span> <span class="n">calculate</span>
+<span class="kn">from</span> <span class="nn">pycalphad.core.errors</span> <span class="kn">import</span> <span class="n">EquilibriumError</span><span class="p">,</span> <span class="n">ConditionError</span>
+<span class="kn">from</span> <span class="nn">pycalphad.core.starting_point</span> <span class="kn">import</span> <span class="n">starting_point</span>
+<span class="kn">from</span> <span class="nn">pycalphad.codegen.callables</span> <span class="kn">import</span> <span class="n">build_phase_records</span>
+<span class="kn">from</span> <span class="nn">pycalphad.core.eqsolver</span> <span class="kn">import</span> <span class="n">_solve_eq_at_conditions</span>
+<span class="kn">from</span> <span class="nn">pycalphad.core.phase_rec</span> <span class="kn">import</span> <span class="n">PhaseRecord</span>
+<span class="kn">from</span> <span class="nn">pycalphad.core.solver</span> <span class="kn">import</span> <span class="n">Solver</span>
+<span class="kn">from</span> <span class="nn">pycalphad.core.light_dataset</span> <span class="kn">import</span> <span class="n">LightDataset</span>
+<span class="kn">from</span> <span class="nn">pycalphad.model</span> <span class="kn">import</span> <span class="n">Model</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 
@@ -250,7 +251,7 @@
             <span class="c1"># "Zero" composition is a common pattern. Do not warn for that case.</span>
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">minimum_composition</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)):</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                    <span class="n">f</span><span class="s2">"Some specified compositions are below the minimum allowed composition of </span><span class="si">{minimum_composition}</span><span class="s2">."</span><span class="p">)</span>
+                    <span class="sa">f</span><span class="s2">"Some specified compositions are below the minimum allowed composition of </span><span class="si">{</span><span class="n">minimum_composition</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
             <span class="n">new_conds</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">minimum_composition</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">new_conds</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">unpack_condition</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
@@ -295,7 +296,7 @@
 <span class="sd">    model : a dict of phase names to Model</span>
 <span class="sd">        Model class to use for each phase.</span>
 <span class="sd">    parameters : dict, optional</span>
-<span class="sd">        Maps SymPy Symbol to numbers, for overriding the values of parameters in the Database.</span>
+<span class="sd">        Maps SymEngine Symbol to numbers, for overriding the values of parameters in the Database.</span>
 <span class="sd">    kwargs</span>
 <span class="sd">        Passed to `calculate`.</span>
 
@@ -395,7 +396,7 @@
 <span class="sd">        Job scheduler for performing the computation.</span>
 <span class="sd">        If None, return a Dask graph of the computation instead of actually doing it.</span>
 <span class="sd">    parameters : dict, optional</span>
-<span class="sd">        Maps SymPy Symbol to numbers, for overriding the values of parameters in the Database.</span>
+<span class="sd">        Maps SymEngine Symbol to numbers, for overriding the values of parameters in the Database.</span>
 <span class="sd">    solver : pycalphad.core.solver.SolverBase</span>
 <span class="sd">        Instance of a solver that is used to calculate local equilibria.</span>
 <span class="sd">        Defaults to a pycalphad.core.solver.Solver.</span>
@@ -473,9 +474,9 @@
         <span class="n">active_phases_without_models</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">active_phases</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">Model</span><span class="p">)]</span>
         <span class="n">active_phases_without_phase_records</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">active_phases</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">phase_records</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">PhaseRecord</span><span class="p">)]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">active_phases_without_phase_records</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">"phase_records must contain a PhaseRecord instance for every active phase. Missing PhaseRecord objects for {sorted(active_phases_without_phase_records)}"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"phase_records must contain a PhaseRecord instance for every active phase. Missing PhaseRecord objects for </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">active_phases_without_phase_records</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">active_phases_without_models</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">"model must contain a Model instance for every active phase. Missing Model objects for {sorted(active_phases_without_models)}"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"model must contain a Model instance for every active phase. Missing Model objects for </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">active_phases_without_models</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">'[done]'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
@@ -488,7 +489,7 @@
     <span class="n">grid_opts</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">str_conds</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">statevar_strings</span><span class="p">})</span>
 
     <span class="k">if</span> <span class="s1">'pdens'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">grid_opts</span><span class="p">:</span>
-        <span class="n">grid_opts</span><span class="p">[</span><span class="s1">'pdens'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="n">grid_opts</span><span class="p">[</span><span class="s1">'pdens'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span>
     <span class="n">grid</span> <span class="o">=</span> <span class="n">calculate</span><span class="p">(</span><span class="n">dbf</span><span class="p">,</span> <span class="n">comps</span><span class="p">,</span> <span class="n">active_phases</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">models</span><span class="p">,</span> <span class="n">fake_points</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                      <span class="n">phase_records</span><span class="o">=</span><span class="n">phase_records</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s1">'GM'</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
                      <span class="n">to_xarray</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">grid_opts</span><span class="p">)</span>
@@ -553,5 +554,6 @@
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/scripts/main.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>
 </html>

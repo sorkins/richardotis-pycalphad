@@ -5,8 +5,8 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="pycalphad.plot package" href="pycalphad.plot.html" /><link rel="prev" title="pycalphad.core package" href="pycalphad.core.html" />
 
-    <meta name="generator" content="sphinx-4.3.0, furo 2021.10.09"/>
-        <title>pycalphad.io package - pycalphad 0.8.6.dev41+g631c41c3 documentation</title>
+    <meta name="generator" content="sphinx-4.5.0, furo 2021.10.09"/>
+        <title>pycalphad.io package - pycalphad 0.8.6.dev55+gf8e39510 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=0254c309f5cadf746f1a613e7677379ac9c8cdcd" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">pycalphad 0.8.6.dev41+g631c41c3 documentation</div></a>
+      <a href="../index.html"><div class="brand">pycalphad 0.8.6.dev55+gf8e39510 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -149,7 +149,7 @@
     <img class="sidebar-logo" src="../_static/pycalphad-logo-withtext.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">pycalphad 0.8.6.dev41+g631c41c3 documentation</span>
+  <span class="sidebar-brand-text">pycalphad 0.8.6.dev55+gf8e39510 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -161,14 +161,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../INSTALLING.html">Install pycalphad</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/BinaryExamples.html">Plotting Isobaric Binary Phase Diagrams with <code class="docutils literal notranslate"><span class="pre">binplot</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/BinaryExamples.html#calculating-energy-surfaces-of-binary-systems">Calculating Energy Surfaces of Binary Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/CementiteAnalysis.html">Heat Capacity of Cementite (<span class="math notranslate nohighlight">\(Fe_3C\)</span>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/EquilibriumWithOrdering.html">Equilibrium Properties and Partial Ordering (Al-Fe and Al-Ni)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/BinaryExamples.html#Calculating-Energy-Surfaces-of-Binary-Systems">Calculating Energy Surfaces of Binary Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/TernaryExamples.html">Plotting Ternary Phase Diagrams and Using Triangular Axes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/UsingCalculationResults.html">Exploring <code class="docutils literal notranslate"><span class="pre">calculate</span></code> and <code class="docutils literal notranslate"><span class="pre">equilibrium</span></code> xarray Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/ChargedPhases.html">Phases with Electrically Charged Species</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/ReferenceStateExamples.html">Calculations with Reference States</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/PlotActivity.html">Calculate and Plot Activity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/EquilibriumWithOrdering.html">Equilibrium Properties and Partial Ordering (Al-Fe and Al-Ni)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/ViscosityModel.html">Custom Models in pycalphad: Viscosity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/UsingCalculationResults.html">Exploring <code class="docutils literal notranslate"><span class="pre">calculate</span></code> and <code class="docutils literal notranslate"><span class="pre">equilibrium</span></code> xarray Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/CementiteAnalysis.html">Heat Capacity of Cementite (<span class="math notranslate nohighlight">\(Fe_3C\)</span>)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
@@ -263,7 +264,7 @@ associated with structured thermodynamic/kinetic data.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pycalphad.io.database.Database.symbols">
 <span class="sig-name descname"><span class="pre">symbols</span></span><a class="headerlink" href="#pycalphad.io.database.Database.symbols" title="Permalink to this definition">¶</a></dt>
-<dd><p>SymPy objects indexed by their name (FUNCTIONs in Thermo-Calc).</p>
+<dd><p>SymEngine objects indexed by their name (FUNCTIONs in Thermo-Calc).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>dict</p>
@@ -289,7 +290,7 @@ associated with structured thermodynamic/kinetic data.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="pycalphad.io.database.Database.add_parameter">
-<span class="sig-name descname"><span class="pre">add_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constituent_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusing_species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_insert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pycalphad/io/database.html#Database.add_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycalphad.io.database.Database.add_parameter" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">add_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constituent_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusing_species</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_insert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pycalphad/io/database.html#Database.add_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycalphad.io.database.Database.add_parameter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a parameter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -298,10 +299,11 @@ associated with structured thermodynamic/kinetic data.</p>
 <li><p><strong>phase_name</strong> (<em>str</em>) – Name of the phase.</p></li>
 <li><p><strong>constituent_array</strong> (<em>list</em>) – Configuration of the sublattices (elements and/or species).</p></li>
 <li><p><strong>param_order</strong> (<em>int</em>) – Polynomial order of the parameter.</p></li>
-<li><p><strong>param</strong> (<em>object</em>) – Abstract representation of the parameter, e.g., in SymPy format.</p></li>
+<li><p><strong>param</strong> (<em>object</em>) – Abstract representation of the parameter, e.g., in SymEngine format.</p></li>
 <li><p><strong>ref</strong> (<em>str</em><em>, </em><em>optional</em>) – Reference for the parameter.</p></li>
 <li><p><strong>diffusing_species</strong> (<em>str</em><em>, </em><em>optional</em>) – (If kinetic parameter) Diffusing species for this parameter.</p></li>
 <li><p><strong>force_insert</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, inserts into the database immediately. False is a delayed insert (for performance).</p></li>
+<li><p><strong>kwargs</strong> (<em>Any</em>) – Additional metadata to insert into the parameter dictionary</p></li>
 </ul>
 </dd>
 </dl>
@@ -350,7 +352,7 @@ similar phases known by different colloquial names.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>local_name</strong> (<em>string</em>) – System-local name of the phase.</p></li>
-<li><p><strong>global_name</strong> (<em>object</em>) – Abstract representation of symbol, e.g., in SymPy format.</p></li>
+<li><p><strong>global_name</strong> (<em>object</em>) – Abstract representation of symbol, e.g., in SymEngine format.</p></li>
 </ul>
 </dd>
 </dl>
@@ -557,8 +559,8 @@ Hints for major constituents and typedefs (Thermo-Calc) go here.</p>
 Thermo-Calc TDB format.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pycalphad.io.tdb.TCCommand">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pycalphad.io.tdb.</span></span><span class="sig-name descname"><span class="pre">TCCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matchString</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identChars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pycalphad/io/tdb.html#TCCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycalphad.io.tdb.TCCommand" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pyparsing.CaselessKeyword</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pycalphad.io.tdb.</span></span><span class="sig-name descname"><span class="pre">TCCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">match_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ident_chars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matchString</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identChars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pycalphad/io/tdb.html#TCCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycalphad.io.tdb.TCCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pyparsing.core.CaselessKeyword</span></code></p>
 <p>Parser element for dealing with Thermo-Calc command abbreviations.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pycalphad.io.tdb.TCCommand.parseImpl">
@@ -567,12 +569,12 @@ Thermo-Calc TDB format.</p>
 </dd></dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="pycalphad.io.tdb.TCPrinter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pycalphad.io.tdb.</span></span><span class="sig-name descname"><span class="pre">TCPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pycalphad/io/tdb.html#TCPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycalphad.io.tdb.TCPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sympy.printing.str.StrPrinter</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pycalphad.io.tdb.</span></span><span class="sig-name descname"><span class="pre">TCPrinter</span></span><a class="reference internal" href="../_modules/pycalphad/io/tdb.html#TCPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycalphad.io.tdb.TCPrinter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Prints Thermo-Calc style function expressions.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="pycalphad.io.tdb.TCPrinter.blacklisted">
-<span class="sig-name descname"><span class="pre">blacklisted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pycalphad/io/tdb.html#TCPrinter.blacklisted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycalphad.io.tdb.TCPrinter.blacklisted" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pycalphad.io.tdb.TCPrinter.doprint">
+<span class="sig-name descname"><span class="pre">doprint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pycalphad/io/tdb.html#TCPrinter.doprint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycalphad.io.tdb.TCPrinter.doprint" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 </dd></dl>
 <dl class="py function">
@@ -659,11 +661,8 @@ Note that not all of these keywords are fully supported yet.</p>
 <li><p><strong>candidate</strong> (<em>str</em>) – Abbreviated keyword to expand.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list of str of matching expanded keywords</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list of str of matching expanded keywords</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -751,5 +750,6 @@ Note that not all of these keywords are fully supported yet.</p>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/scripts/main.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>
 </html>

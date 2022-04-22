@@ -4,8 +4,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
-    <meta name="generator" content="sphinx-4.3.0, furo 2021.10.09"/>
-        <title>pycalphad.core.utils - pycalphad 0.8.6.dev41+g631c41c3 documentation</title>
+    <meta name="generator" content="sphinx-4.5.0, furo 2021.10.09"/>
+        <title>pycalphad.core.utils - pycalphad 0.8.6.dev55+gf8e39510 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=0254c309f5cadf746f1a613e7677379ac9c8cdcd" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">pycalphad 0.8.6.dev41+g631c41c3 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">pycalphad 0.8.6.dev55+gf8e39510 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
     <img class="sidebar-logo" src="../../../_static/pycalphad-logo-withtext.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">pycalphad 0.8.6.dev41+g631c41c3 documentation</span>
+  <span class="sidebar-brand-text">pycalphad 0.8.6.dev55+gf8e39510 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -160,14 +160,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../INSTALLING.html">Install pycalphad</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/BinaryExamples.html">Plotting Isobaric Binary Phase Diagrams with <code class="docutils literal notranslate"><span class="pre">binplot</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/BinaryExamples.html#calculating-energy-surfaces-of-binary-systems">Calculating Energy Surfaces of Binary Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/CementiteAnalysis.html">Heat Capacity of Cementite (<span class="math notranslate nohighlight">\(Fe_3C\)</span>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/EquilibriumWithOrdering.html">Equilibrium Properties and Partial Ordering (Al-Fe and Al-Ni)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/BinaryExamples.html#Calculating-Energy-Surfaces-of-Binary-Systems">Calculating Energy Surfaces of Binary Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/TernaryExamples.html">Plotting Ternary Phase Diagrams and Using Triangular Axes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/UsingCalculationResults.html">Exploring <code class="docutils literal notranslate"><span class="pre">calculate</span></code> and <code class="docutils literal notranslate"><span class="pre">equilibrium</span></code> xarray Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/ChargedPhases.html">Phases with Electrically Charged Species</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/ReferenceStateExamples.html">Calculations with Reference States</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/PlotActivity.html">Calculate and Plot Activity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/EquilibriumWithOrdering.html">Equilibrium Properties and Partial Ordering (Al-Fe and Al-Ni)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/ViscosityModel.html">Custom Models in pycalphad: Viscosity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/UsingCalculationResults.html">Exploring <code class="docutils literal notranslate"><span class="pre">calculate</span></code> and <code class="docutils literal notranslate"><span class="pre">equilibrium</span></code> xarray Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/CementiteAnalysis.html">Heat Capacity of Cementite (<span class="math notranslate nohighlight">\(Fe_3C\)</span>)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
@@ -222,16 +223,15 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">pycalphad.variables</span> <span class="k">as</span> <span class="nn">v</span>
-<span class="kn">from</span> <span class="nn">pycalphad.core.halton</span> <span class="k">import</span> <span class="n">halton</span>
-<span class="kn">from</span> <span class="nn">pycalphad.core.constants</span> <span class="k">import</span> <span class="n">MIN_SITE_FRACTION</span>
-<span class="kn">from</span> <span class="nn">sympy.utilities.lambdify</span> <span class="k">import</span> <span class="n">lambdify</span>
-<span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">Symbol</span>
+<span class="kn">from</span> <span class="nn">pycalphad.core.halton</span> <span class="kn">import</span> <span class="n">halton</span>
+<span class="kn">from</span> <span class="nn">pycalphad.core.constants</span> <span class="kn">import</span> <span class="n">MIN_SITE_FRACTION</span>
+<span class="kn">from</span> <span class="nn">symengine</span> <span class="kn">import</span> <span class="n">lambdify</span><span class="p">,</span> <span class="n">Symbol</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">operator</span>
 <span class="kn">import</span> <span class="nn">functools</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">import</span> <span class="nn">collections</span>
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="k">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Mapping</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Mapping</span>
 
 
 <div class="viewcode-block" id="point_sample"><a class="viewcode-back" href="../../../api/pycalphad.core.html#pycalphad.core.utils.point_sample">[docs]</a><span class="k">def</span> <span class="nf">point_sample</span><span class="p">(</span><span class="n">comp_count</span><span class="p">,</span> <span class="n">pdof</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
@@ -277,42 +277,6 @@
         <span class="n">pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">comp_count</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">pts</span></div>
 
-<div class="viewcode-block" id="make_callable"><a class="viewcode-back" href="../../../api/pycalphad.core.html#pycalphad.core.utils.make_callable">[docs]</a><span class="k">def</span> <span class="nf">make_callable</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Take a SymPy object and create a callable function.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    model, SymPy object</span>
-<span class="sd">        Abstract representation of function</span>
-<span class="sd">    variables, list</span>
-<span class="sd">        Input variables, ordered in the way the return function will expect</span>
-<span class="sd">    mode, ['numpy', 'numba', 'sympy'], optional</span>
-<span class="sd">        Method to use when 'compiling' the function. SymPy mode is</span>
-<span class="sd">        slow and should only be used for debugging. If Numba is installed,</span>
-<span class="sd">        it can offer speed-ups when calling the energy function many</span>
-<span class="sd">        times on multi-core CPUs.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    Function that takes arguments in the same order as 'variables'</span>
-<span class="sd">    and returns the energy according to 'model'.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    None yet.</span>
-<span class="sd">    """</span>
-    <span class="n">energy</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">mode</span> <span class="o">=</span> <span class="s1">'numpy'</span>
-
-    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">'sympy'</span><span class="p">:</span>
-        <span class="n">energy</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">vs</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">vs</span><span class="p">))</span><span class="o">.</span><span class="n">evalf</span><span class="p">()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">energy</span> <span class="o">=</span> <span class="n">lambdify</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">variables</span><span class="p">),</span> <span class="n">model</span><span class="p">,</span> <span class="n">dummify</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                          <span class="n">modules</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">energy</span></div>
 
 <div class="viewcode-block" id="sizeof_fmt"><a class="viewcode-back" href="../../../api/pycalphad.core.html#pycalphad.core.utils.sizeof_fmt">[docs]</a><span class="k">def</span> <span class="nf">sizeof_fmt</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">'B'</span><span class="p">):</span>
     <span class="sd">"""</span>
@@ -609,7 +573,7 @@
 <span class="sd">    model : Model class, a dict of phase names to Model, or a Iterable of both</span>
 <span class="sd">        Model class to use for each phase.</span>
 <span class="sd">    parameters : dict, optional</span>
-<span class="sd">        Maps SymPy Symbol to numbers, for overriding the values of parameters in</span>
+<span class="sd">        Maps SymEngine Symbol to numbers, for overriding the values of parameters in</span>
 <span class="sd">        the Database.</span>
 <span class="sd">    symbols_only : bool</span>
 <span class="sd">        If True, symbols will be extracted from the parameters dict and used to</span>
@@ -620,7 +584,7 @@
 <span class="sd">    dict</span>
 <span class="sd">        Dictionary of Model instances corresponding to the passed phases.</span>
 <span class="sd">    """</span>
-    <span class="kn">from</span> <span class="nn">pycalphad</span> <span class="k">import</span> <span class="n">Model</span>  <span class="c1"># avoid cyclic imports</span>
+    <span class="kn">from</span> <span class="nn">pycalphad</span> <span class="kn">import</span> <span class="n">Model</span>  <span class="c1"># avoid cyclic imports</span>
     <span class="n">parameters</span> <span class="o">=</span> <span class="n">parameters</span> <span class="k">if</span> <span class="n">parameters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
     <span class="k">if</span> <span class="n">symbols_only</span><span class="p">:</span>
         <span class="n">parameters</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">extract_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
@@ -683,16 +647,6 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Symbol</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="wrap_symbol_symengine"><a class="viewcode-back" href="../../../api/pycalphad.core.html#pycalphad.core.utils.wrap_symbol_symengine">[docs]</a><span class="k">def</span> <span class="nf">wrap_symbol_symengine</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">symengine</span> <span class="k">import</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">sympify</span>
-    <span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">Symbol</span> <span class="k">as</span> <span class="n">Symbol_sympy</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">obj</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Symbol_sympy</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">sympify</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Symbol</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span></div>
 </pre></div>
         </article>
       </div>
@@ -724,5 +678,6 @@
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/scripts/main.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>
 </html>
