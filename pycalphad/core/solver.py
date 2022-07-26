@@ -169,6 +169,8 @@ class NoMiscibilityGapSolver(Solver):
         chosen_compsets = dict()
         compset_count = Counter()
         for compset in composition_sets:
+            if compset.NP == 0:
+                continue
             compset_count[compset.phase_record.phase_name] += 1
             best_compset_so_far = chosen_compsets.get(compset.phase_record.phase_name, None)
             if best_compset_so_far is None:
