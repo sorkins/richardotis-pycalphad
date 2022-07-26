@@ -1,5 +1,5 @@
 import numpy as np
-from collections import namedtuple
+from collections import namedtuple, Counter
 from pycalphad.core.minimizer import SystemSpecification
 
 SolverResult = namedtuple('SolverResult', ['converged', 'x', 'chemical_potentials'])
@@ -167,11 +167,20 @@ class NoMiscibilityGapSolver(Solver):
 
     def starting_point_hook(self, composition_sets, phase_records, chemical_potentials, conditions):
         chosen_compsets = dict()
+        compset_count = Counter()
         for compset in composition_sets:
+            compset_count[compset.phase_record.phase_name] += 1
             best_compset_so_far = chosen_compsets.get(compset.phase_record.phase_name, None)
             if best_compset_so_far is None:
                 chosen_compsets[compset.phase_record.phase_name] = compset
-            elif best_compset_so_far.NP < compset.NP:
-                # Prefer compsets with the largest initial phase amount
-                chosen_compsets[compset.phase_record.phase_name] = compset
+            else:
+                chosen_compset = chosen_compsets[compset.phase_record.phase_name]
+                # Combine compsets of the same phase by averaging dof
+                chosen_compset.NP += compset.NP
+                chosen_compset.dof[:] = np.array(chosen_compset.dof) + np.array(compset.dof)
+
         composition_sets[:] = list(chosen_compsets.values())
+
+        # Compute average by normalizing previously calculated sum
+        for compset in composition_sets:
+            compset.dof[:] = np.array(compset.dof) / compset_count[compset.phase_record.phase_name]

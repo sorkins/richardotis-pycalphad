@@ -170,6 +170,8 @@ def _solve_eq_at_conditions(properties, phase_records, grid, conds_keys, state_v
     cdef np.ndarray[ndim=1, dtype=np.float64_t] p_y, l_constraints, step, chemical_potentials
     cdef np.ndarray[ndim=1, dtype=np.float64_t] site_fracs, l_multipliers, phase_fracs
     cdef np.ndarray[ndim=2, dtype=np.float64_t] constraint_jac
+    if (solver is not None) and isinstance(solver, type):
+        raise ValueError('Custom solver should be an instance, not a type. Did you remember the parentheses?')
     iter_solver = solver if solver is not None else Solver(verbose=verbose, remove_metastable=True)
 
     # Factored out via profiling
