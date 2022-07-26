@@ -7,6 +7,29 @@ SolverResult = namedtuple('SolverResult', ['converged', 'x', 'chemical_potential
 class SolverBase(object):
     """"Base class for solvers."""
     ignore_convergence = False
+    add_nearly_stable = True
+    add_new_phases_per_iteration = True
+
+    def starting_point_hook(self, composition_sets, phase_records, chemical_potentials, conditions):
+        """
+        Mutates the first argument.
+
+        Parameters
+        ----------
+        composition_sets : List[pycalphad.core.composition_set.CompositionSet]
+            List of CompositionSet objects in the starting point. Modified in place.
+        phase_records: Dict[str, pycalphad.core.phase_rec.PhaseRecord]
+        chemical_potentials: np.ndarray
+            Initial guess for chemical potentials.
+        conditions : OrderedDict[str, float]
+            Conditions to be satisfied by the solver.
+
+        Returns
+        -------
+        None
+        """
+        pass
+
     def solve(self, composition_sets, conditions):
         """
         *Implement this method.*
@@ -30,7 +53,6 @@ class Solver(SolverBase):
     def __init__(self, verbose=False, remove_metastable=True, **options):
         self.verbose = verbose
         self.remove_metastable = remove_metastable
-
 
     def get_system_spec(self, composition_sets, conditions):
         """
@@ -131,3 +153,25 @@ class Solver(SolverBase):
             print('Chemical Potentials', chemical_potentials)
             print(np.asarray(x))
         return SolverResult(converged=converged, x=x, chemical_potentials=chemical_potentials)
+
+
+class NoMiscibilityGapSolver(Solver):
+    """
+    Solver that will not return miscibility gaps (multiple composition sets of the same phase).
+
+    Starting point is not guaranteed feasible, so the solver has to work harder to find the solution.
+    This may impact the convergence rate.
+    """
+    add_nearly_stable = True
+    add_new_phases_per_iteration = False
+
+    def starting_point_hook(self, composition_sets, phase_records, chemical_potentials, conditions):
+        chosen_compsets = dict()
+        for compset in composition_sets:
+            best_compset_so_far = chosen_compsets.get(compset.phase_record.phase_name, None)
+            if best_compset_so_far is None:
+                chosen_compsets[compset.phase_record.phase_name] = compset
+            elif best_compset_so_far.NP < compset.NP:
+                # Prefer compsets with the largest initial phase amount
+                chosen_compsets[compset.phase_record.phase_name] = compset
+        composition_sets[:] = list(chosen_compsets.values())

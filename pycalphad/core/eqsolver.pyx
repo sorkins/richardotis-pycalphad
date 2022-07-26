@@ -222,8 +222,10 @@ def _solve_eq_at_conditions(properties, phase_records, grid, conds_keys, state_v
             composition_sets.append(compset)
         chemical_potentials = prop_MU_values[it.multi_index]
         energy = prop_GM_values[it.multi_index]
-        add_nearly_stable(composition_sets, phase_records, grid, curr_idx, chemical_potentials,
-                          state_variable_values, -1000, verbose)
+        if iter_solver.add_nearly_stable is not None:
+            add_nearly_stable(composition_sets, phase_records, grid, curr_idx, chemical_potentials,
+                            state_variable_values, -1000, verbose)
+        iter_solver.starting_point_hook(composition_sets, phase_records, chemical_potentials, cur_conds)
         #print('Composition Sets', composition_sets)
         phase_amt_sum = 0.0
         for compset in composition_sets:
@@ -239,9 +241,12 @@ def _solve_eq_at_conditions(properties, phase_records, grid, conds_keys, state_v
             result = iter_solver.solve(composition_sets, cur_conds)
 
             chemical_potentials[:] = result.chemical_potentials
-            changed_phases = add_new_phases(composition_sets, removed_compsets, phase_records,
-                                            grid, curr_idx, chemical_potentials, state_variable_values,
-                                            1e-4, verbose)
+            if iter_solver.add_new_phases_per_iteration is not None:
+                changed_phases = add_new_phases(composition_sets, removed_compsets, phase_records,
+                                                grid, curr_idx, chemical_potentials, state_variable_values,
+                                                1e-4, verbose)
+            else:
+                changed_phases = False
             iterations += 1
             if not changed_phases:
                 break
