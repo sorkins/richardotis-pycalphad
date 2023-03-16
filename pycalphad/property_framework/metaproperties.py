@@ -155,7 +155,7 @@ class IsolatedPhase:
     _compset: CompositionSet
 
     def __init__(self, phase: Union[CompositionSet, str],
-                 wks: Optional["Workspace"]):
+                 wks: Optional["Workspace"] = None):
         if wks is None:
             if not isinstance(phase, CompositionSet):
                 raise ValueError('Isolated phase calculation requires a starting point for the phase;'

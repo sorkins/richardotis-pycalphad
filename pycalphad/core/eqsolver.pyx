@@ -108,7 +108,7 @@ def add_nearly_stable(object composition_sets, object phase_records,
     # Add unrepresented phases as metastable composition sets
     # This should help catch phases around the limit of stability
     for phase_name in sorted(phase_records.keys()):
-        if phase_name in entered_phases:
+        if phase_name in entered_phases or grid.attrs['phase_indices'].get(phase_name, True):
             continue
         phase_record = phase_records[phase_name]
         phase_indices = grid.attrs['phase_indices'][phase_name]
